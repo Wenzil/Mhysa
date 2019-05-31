@@ -525,3 +525,18 @@ export function batch(batchSize: number) {
         },
     });
 }
+
+/**
+ * Stores chunks of data internally and batches the data into a single chunk when the limit is reached.
+ */
+export function unbatch() {
+    return new Transform({
+        objectMode: true,
+        transform(data, encoding, callback) {
+            for (const d of data) {
+                this.push(d);
+            }
+            callback();
+        },
+    });
+}
