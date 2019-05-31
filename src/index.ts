@@ -499,3 +499,27 @@ export function last<T>(readable: Readable): Promise<T | null> {
             .on("end", () => resolve(lastChunk));
     });
 }
+
+/**
+ * Stores chunks of data internally and batches the data into a single chunk when the limit is reached.
+ *
+ * @param batchSize Size of the batches
+ */
+export function batch(batchSize: number) {
+    const buffer: any[] = [];
+    return new Transform({
+        transform(chunk, encoding, callback) {
+            if (buffer.length >= batchSize) {
+                this.push(buffer.splice(0));
+                callback();
+            } else {
+                buffer.push(chunk);
+                callback();
+            }
+        },
+        flush(callback) {
+            this.push(buffer.splice(0));
+            callback();
+        },
+    });
+}
