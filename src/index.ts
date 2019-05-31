@@ -527,7 +527,7 @@ export function batch(batchSize: number) {
 }
 
 /**
- * Stores chunks of data internally and batches the data into a single chunk when the limit is reached.
+ * Unbatches and sends individual chunks of data
  */
 export function unbatch() {
     return new Transform({
