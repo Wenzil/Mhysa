@@ -19,6 +19,7 @@ import {
     child,
     reduce,
     last,
+    batch,
 } from ".";
 
 test.cb("fromArray() streams array elements in flowing mode", t => {
@@ -1179,4 +1180,29 @@ test("last() resolves to the last chunk streamed by the given readable stream", 
     source.push(null);
     const lastChunk = await lastPromise;
     expect(lastChunk).to.equal("ef");
+});
+
+test.cb("batch() batches chunks together", t => {
+    t.plan(3);
+    const source = new Readable({ objectMode: true });
+    const expectedElements = [["a", "b", "c"], ["d", "e", "f"], ["g"]];
+    let i = 0;
+    source
+        .pipe(batch(3))
+        .on("data", (element: string[]) => {
+            expect(element).to.deep.equal(expectedElements[i]);
+            t.pass();
+            i++;
+        })
+        .on("error", t.end)
+        .on("end", t.end);
+
+    source.push("a");
+    source.push("b");
+    source.push("c");
+    source.push("d");
+    source.push("e");
+    source.push("f");
+    source.push("g");
+    source.push(null);
 });

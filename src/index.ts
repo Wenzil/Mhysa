@@ -508,8 +508,10 @@ export function last<T>(readable: Readable): Promise<T | null> {
 export function batch(batchSize: number) {
     const buffer: any[] = [];
     return new Transform({
+        objectMode: true,
         transform(chunk, encoding, callback) {
-            if (buffer.length >= batchSize) {
+            if (buffer.length === batchSize - 1) {
+                buffer.push(chunk);
                 this.push(buffer.splice(0));
                 callback();
             } else {
