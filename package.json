@@ -1,6 +1,6 @@
 {
     "name": "mhysa",
-    "version": "1.0.2",
+    "version": "2.0.0-alpha.1",
     "description": "Streams and event emitter utils for Node.js",
     "keywords": [
         "promise",
@@ -11,6 +11,16 @@
     "author": {
         "name": "Wenzil"
     },
+    "contributors": [
+        {
+            "name": "jerry",
+            "email": "jerry@jogogo.co"
+        },
+        {
+            "name": "lewis",
+            "email": "lewis@jogogo.co"
+        }
+    ],
     "license": "MIT",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
@@ -25,25 +35,27 @@
         "test": "ava",
         "lint": "tslint -p tsconfig.json",
         "validate:tslint": "tslint-config-prettier-check ./tslint.json",
-        "prepublishOnly": "yarn lint && yarn test && yarn tsc"
+        "prepublishOnly": "yarn lint && yarn test && yarn tsc -d"
     },
     "dependencies": {},
     "devDependencies": {
         "@types/chai": "^4.1.7",
-        "@types/node": "^10.12.10",
-        "ava": "^1.0.0-rc.2",
+        "@types/node": "^12.7.2",
+        "@types/sinon": "^7.0.13",
+        "ava": "^2.4.0",
         "chai": "^4.2.0",
         "mhysa": "./",
         "prettier": "^1.14.3",
-        "ts-node": "^7.0.1",
+        "sinon": "^7.4.2",
+        "ts-node": "^8.3.0",
         "tslint": "^5.11.0",
         "tslint-config-prettier": "^1.16.0",
         "tslint-plugin-prettier": "^2.0.1",
-        "typescript": "^3.1.6"
+        "typescript": "^3.5.3"
     },
     "ava": {
         "files": [
-            "src/**/*.spec.ts"
+            "tests/*.spec.ts"
         ],
         "sources": [
             "src/**/*.ts"
