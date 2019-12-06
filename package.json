@@ -1,6 +1,6 @@
 {
-    "name": "@jogogo/mhysa",
-    "version": "0.1.0-alpha.1",
+    "name": "mhysa",
+    "version": "2.0.0-alpha.1",
     "description": "Streams and event emitter utils for Node.js",
     "keywords": [
         "promise",
@@ -27,11 +27,8 @@
     "files": [
         "dist"
     ],
-    "publishConfig": {
-        "registry": "https://npm.dev.jogogo.co/"
-    },
     "repository": {
-        "url": "git@github.com:Jogogoplay/mhysa.git",
+        "url": "git@github.com:Wenzil/Mhysa.git",
         "type": "git"
     },
     "scripts": {
